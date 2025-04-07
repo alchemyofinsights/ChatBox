@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbox Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5 text-center">
+    <h1 class="mb-4">Welcome to Chatbox</h1>
+
+    <div class="d-grid gap-3 col-6 mx-auto">
+        <a href="{% url 'create_chatbox' %}" class="btn btn-success btn-lg">Create a Chatbox</a>
+        <a href="{% url 'join_chatbox' %}" class="btn btn-primary btn-lg">Join a Chatbox</a>
+        
+        <!-- Enter a Chat Room by Name -->
+        <form onsubmit="return enterRoom();" class="mt-4">
+            <div class="input-group">
+                <input type="text" id="room-name-input" class="form-control" placeholder="Enter room name" required>
+                <button type="submit" class="btn btn-outline-secondary">Go to Room</button>
+            </div>
+        </form>
+
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-4">Logout</a>
+    </div>
+
+    <script>
+        function enterRoom() {
+            const roomName = document.getElementById("room-name-input").value.trim();
+            if (roomName) {
+                window.location.href = "/chat/" + encodeURIComponent(roomName) + "/";
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
